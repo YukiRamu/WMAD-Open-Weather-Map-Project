@@ -1,0 +1,19 @@
+Yuki's goal in mid-term
+
+1. to feel comfortable with passing parameters across js file. 
+2. to write JS without reference (at least what I have used before in previous assignments)
+3. Review CSS grid
+
+*****Must*****
+1. update data every 2 mins
+
+**** Next ****
+
+2. Calcuration: get time, date, sunrise/sunset
+
+*** Try *****
+Rader, Live camera, some animation with JavaScript
+
+Dark <--> Light mode change
+
+try bootstrap??
