@@ -17,7 +17,7 @@ let temperature = document.getElementById("temperature");
 let description = document.getElementById("description");
 let feels_like = document.getElementById("feels_like");
 let humidity = document.getElementById("humidity");
-const pressure = document.getElementById("pressure");
+let pressure = document.getElementById("pressure");
 
 //animation
 const openBtn = document.getElementById("openBtn");
@@ -28,7 +28,7 @@ const sideBar = document.getElementById("sideBar");
 const getWeather = (cityName) => {
   console.log(`${url}${cityName}&appid=${apiKey}`); //****** DELETE LATER check url
 
-  fetch(`${url}${cityName}&appid=${apiKey}`) //fetch API with input value and API key
+  fetch(`${url}${cityName}&units=metric&appid=${apiKey}`) //fetch API with input value and API key
     .then((response) => {
       if (!response.ok) { //check response status (200~299)
         throw error(`Fetch API failed`);
@@ -46,18 +46,19 @@ const getWeather = (cityName) => {
         icon.innerHTML = `${data.weather[0].icon}`; //icon  --- need image
         temperature.innerHTML = `${data.main.temp}`; //main temperature
         description.innerHTML = `${data.weather[0].main}`; //description ---array
-        feels_like.innerHTML = `${data.main.feels_like}`; //feels like
-        humidity.innerHTML = `${data.main.humidity}`; //humidity
-        pressure.innerHTML = `${data.main.pressure}`; //pressure
+        feels_like.innerHTML = `<span>Feels like: </span>${data.main.feels_like}`; //feels like
+        humidity.innerHTML = `<span>Humidity: </span>${data.main.humidity} %`; //humidity
+        pressure.innerHTML = `<span>Pressure: </span>${data.main.pressure} hPa`; //pressure
       }
       createHTML();
       console.log(data); //****** DELETE LATER check data
+      console.log(`${data.sys.sunrise}`.slice(0,4))
+      console.log(`${data.sys.sunset}`.slice(0,4))
     })
     .catch(() => {
       console.error(`Something went wrong. Weather Forecast failed to be loaded.`);
     })
 }
-
 
 /* ======= call functions ======= */
 //Open side search bar

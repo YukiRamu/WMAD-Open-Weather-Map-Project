@@ -3,7 +3,7 @@
   --primary-color: white;
   --secondary-color: black;
 }
-
+/* General Styling */
 body {
   width: 100%;
   height: 100vh;
@@ -28,9 +28,13 @@ body::before {
   right: -5px;
   bottom: -5px;
 }
+button {
+  background-color: lightsalmon;
+  border: none;
+}
 /* the entire display field */
 .container {
-  font-family: 'Amatic SC', cursive;
+  /* font-family: 'Amatic SC', cursive; */
   background-image: url(./img/img3.jpeg);
   width: 90%;
   height: 80vh;
@@ -79,8 +83,9 @@ body::before {
 }
 /* weather information display field */
 .displayWeather {
-  width: 100%;
+  width: 80%;
   height: 100%;
+  margin-left: auto;
   display: flex;
   justify-content: center;
   /* flex-direction: row;
@@ -95,3 +100,11 @@ body::before {
 .displayWeather .currentWeather {
   width: 100%;
 }
+.displayWeather h2 {
+  font-size: 3.5em ;
+  margin-top: 2em;
+}
+.displayWeather p {
+  font-size: 2em;
+}
+
