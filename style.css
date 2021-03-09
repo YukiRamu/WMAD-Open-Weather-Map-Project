@@ -92,17 +92,25 @@ button {
   align-items: center; */
   text-align: center;
 }
-
 .displayWeather .currentCity {
   width: 100%;
 }
-
 .displayWeather .currentWeather {
   width: 100%;
 }
-.displayWeather h2 {
+.displayWeather .currentCity h2 {
   font-size: 3.5em ;
-  margin-top: 2em;
+  margin-top: 2.2em;
+}
+.displayWeather .currentWeather h2 {
+  font-size: 3.5em ;
+}
+.displayWeather .currentWeather .icon {
+  height: 20%;
+}
+
+.displayWeather .currentWeather img {
+  width: 30% ;
 }
 .displayWeather p {
   font-size: 2em;
