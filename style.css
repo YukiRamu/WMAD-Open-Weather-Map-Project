@@ -1,0 +1,97 @@
+/* Yuki Matsubara Morning Class WMAD2 Mid-term */
+:root {
+  --primary-color: white;
+  --secondary-color: black;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  background-image: url(./img/img6.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: var(--primary-color);
+  overflow: hidden;
+  position: relative;
+  z-index: 0;
+}
+/* blur effect for background image */
+body::before {
+  content: "";
+  background: inherit;
+  position: absolute;
+  z-index: -1;
+  filter: blur(5px);
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+}
+/* the entire display field */
+.container {
+  font-family: 'Amatic SC', cursive;
+  background-image: url(./img/img3.jpeg);
+  width: 90%;
+  height: 80vh;
+  position: absolute;
+  margin: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 2em var(--secondary-color);
+}
+/* side search bar */
+.sideBar {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  width: 0%;
+  height: 100%;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: slategray;
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+.sideBar .searchCity {
+  height: 10%;
+}
+
+.sideBar .searchBtn {
+  height: 10%;
+}
+
+.sideBar .searchBtn .fa-search-location {
+  color: var(--secondary-color);
+}
+/* open button for side search bar */
+.openBtn {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+/* detailed forecast */
+.fullForecast {
+  /* contents added later */
+}
+/* weather information display field */
+.displayWeather {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  /* flex-direction: row;
+  align-items: center; */
+  text-align: center;
+}
+
+.displayWeather .currentCity {
+  width: 100%;
+}
+
+.displayWeather .currentWeather {
+  width: 100%;
+}

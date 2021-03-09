@@ -1,0 +1,69 @@
+<!--Yuki Matsubara Morning Class WMAD2 Mid Term-->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Weather Forecast</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!--Google fonts-->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap" rel="stylesheet">
+  <!--Icon: fontawesome-->
+  <script src="https://kit.fontawesome.com/a62f436beb.js" crossorigin="anonymous"></script>
+  <!--CSS links-->
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="container">
+    <!-- ===== side search bar ===== -->
+    <div class="sideBar" id="sideBar">
+      <input id="searchCity" class="searchCity" type="text" placeholder="Enter a city...">
+      <button class="searchBtn" id="searchBtn" type="submit" name="searchBtn" value="">
+        <i class="fas fa-search-location"></i>
+      </button>
+    </div>
+    <!-- <a href="https://www.nationsonline.org/oneworld/country_code_list.htm">Country List</a> -->
+
+    <!--open side search bar-->
+    <button class="openBtn" id="openBtn" type="submit" name="openBtn" value="">
+      <i class="fab fa-periscope"></i>
+    </button>
+
+    <!-- ===== detailed forecast =====-->
+    <div class="fullForecast">
+
+    </div>
+
+    <!-- ===== weather information display field =====-->
+    <div class="displayWeather">
+      <div class="currentCity">
+        <h2 id="location"></h2>
+        <p id="time">10:30</p>
+        <!--not included-->
+        <p id="date">March 8 Monday</p>
+        <!--not included-->
+        <p id="sunrise">Sunrise: 6:37</p>
+        <p id="sunset">Sunset: 17:37</p>
+      </div>
+      <div class="currentWeather">
+        <p id="icon"></p>
+        <h2 id="temperature">5 C</h2>
+        <p id="description"></p>
+        <p id="feels_like">feels like: 6 C</p>
+        <p id="humidity">humidity: 60 %</p>
+        <p id="pressure">pressure: 1014 hPa</p>
+        <button id="fahrenheit" type="button" name="fahrenheit">°F</button>
+        <button id="celsius" type="button" name="celsius">°C</button>
+      </div>
+    </div>
+  </div>
+  <!--Read JavaScript-->
+  <script type="text/javascript" src="./index.js"></script>
+</body>
+
+</html>
