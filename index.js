@@ -28,13 +28,13 @@ const sideBar = document.getElementById("sideBar");
 
 /* ======= function declaration ======= */
 //fetch API - get weather info
-const getWeather = (cityName) => {
+const getWeather = async (cityName) => {
+  
   console.log(`${url}${cityName}&appid=${apiKey}`); //****** DELETE LATER check url
 
   fetch(`${url}${cityName}&units=${units}&appid=${apiKey}`) //fetch API with input value and API key
     .then((response) => {
       console.log(response);
-      console.log("response status is " + response.status)
       if (!response.ok) { //check response status (ok:00~299)
         alert(`A city is not found. : HTTPS status = ${response.status}`)
         throw error(response.statusText);
@@ -53,7 +53,6 @@ const getWeather = (cityName) => {
 
       //insert HTML tags and display data
       const createHTML = () => {
-        console.log(displayUnits)
         city_country.innerHTML = `${data.name}, ${data.sys.country}`; //location
         sunrise.innerHTML = `<span>Sunrise: </span>${data.sys.sunrise}`; //sunrise 
         sunset.innerHTML = `<span>Sunset: </span>${data.sys.sunset}`; //sunset
@@ -65,10 +64,8 @@ const getWeather = (cityName) => {
         pressure.innerHTML = `<span>Pressure: </span>${data.main.pressure} hPa`; //pressure
       }
       createHTML();
+      console.log("done creating HTML")
 
-      //console.log(data); /!!!! DELETE LATER !!!!!!check data
-      //console.log(`${data.sys.sunrise}`.slice(0, 4))//****** UTC DELETE LATER check data
-      //xconsole.log(`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`); 
     })
     .catch(() => {
       console.error(`Something went wrong. Weather Forecast failed to be loaded.`);
@@ -82,29 +79,35 @@ openBtn.addEventListener("click", () => {
 })
 
 //Show data when search button is clicked
-searchBtn.addEventListener("click", () => {
-  //★★★ */validation check to be added 
-  getWeather(searchCity.value); //pass the input city value
-  searchCity.value = ""; //clear input
-  //refresh(); //refresh every 2 mins
+searchBtn.addEventListener("click", async () => {
+  clearInterval(setInterval); //not work
+  //validation check (number or null)
+  if (!isNaN(searchCity.value) || searchCity.value == null) {
+    alert("Please enter a valid city name. Number and Empty are not allowed");
+  } else {
+    await getWeather(searchCity.value); //pass the input city value
+    //searchCity.value = ""; //clear input
+  }
+  await refresh(); //refresh every 2 mins
 });
 
 //Show Vancouver weather by default
-window.addEventListener("load", () => {
-  getWeather("Vancouver"); //pass "Vancouver" 
-  //refresh(); //refresh every 2 mins
+window.addEventListener("load", async () => {
+  await getWeather("Vancouver"); //pass "Vancouver"
+  await refresh(); //refresh every 2 mins
 })
 
-/* =============== To be added ================ */
-//Set timer (2 mins auto refreshing)
-const refresh = () => {
+/* =============== Under const ================ */
+//Set timer (2 mins auto refresh-ing)
+const refresh = async () => {
   //setInterval(refresh, 5000);
-  if (!searchCity.value == "Vancouver") {
-    console.log("Hi refreshing input city");
+  if (!searchCity.value == "Vancouver") { //not vancouver
+    console.log("Hi refreshing input city" + searchCity.value);
+    clearInterval(setInterval); // not work
     setInterval(getWeather(searchCity.value), 5000);
   }
-  else {
-    console.log("Refreshing vancouver");
+  else { //vancouver
+    console.log("Refreshing Vancouver weather");
     setInterval(() => {
       window.location.reload();
     }, 10000);
@@ -112,8 +115,6 @@ const refresh = () => {
 }
 
 //setTimeout (getWeather("Vancouver"),5000); //only one time
-
-//undifined
 
 //Temperature units change button
 
