@@ -20,6 +20,7 @@ let feels_like = document.getElementById("feels_like");
 let humidity = document.getElementById("humidity");
 let pressure = document.getElementById("pressure");
 let displayUnits = "";
+let appendHTML = "";
 
 //animation
 const openBtn = document.getElementById("openBtn");
@@ -33,12 +34,12 @@ const getWeather = (cityName) => {
   fetch(`${url}${cityName}&units=${units}&appid=${apiKey}`) //fetch API with input value and API key
     .then((response) => {
       console.log(response);
-      console.log ("response status is " + response.status)
+      console.log("response status is " + response.status)
       if (!response.ok) { //check response status (ok:00~299)
         alert(`A city is not found. : HTTPS status = ${response.status}`)
         throw error(response.statusText);
       }
-      else {      
+      else {
         return response.json(); //convert to JSON
       }
     })
@@ -49,7 +50,7 @@ const getWeather = (cityName) => {
       } else if (units = "imperial") {
         displayUnits = "°F";
       }
-     
+
       //insert HTML tags and display data
       const createHTML = () => {
         console.log(displayUnits)
@@ -64,6 +65,7 @@ const getWeather = (cityName) => {
         pressure.innerHTML = `<span>Pressure: </span>${data.main.pressure} hPa`; //pressure
       }
       createHTML();
+
       //console.log(data); /!!!! DELETE LATER !!!!!!check data
       //console.log(`${data.sys.sunrise}`.slice(0, 4))//****** UTC DELETE LATER check data
       //xconsole.log(`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`); 
@@ -84,16 +86,33 @@ searchBtn.addEventListener("click", () => {
   //★★★ */validation check to be added 
   getWeather(searchCity.value); //pass the input city value
   searchCity.value = ""; //clear input
+  //refresh(); //refresh every 2 mins
 });
 
 //Show Vancouver weather by default
 window.addEventListener("load", () => {
   getWeather("Vancouver"); //pass "Vancouver" 
+  //refresh(); //refresh every 2 mins
 })
 
 /* =============== To be added ================ */
 //Set timer (2 mins auto refreshing)
-setInterval(getWeather("Vancouver"), 5000);
+const refresh = () => {
+  //setInterval(refresh, 5000);
+  if (!searchCity.value == "Vancouver") {
+    console.log("Hi refreshing input city");
+    setInterval(getWeather(searchCity.value), 5000);
+  }
+  else {
+    console.log("Refreshing vancouver");
+    setInterval(() => {
+      window.location.reload();
+    }, 10000);
+  }
+}
+
+//setTimeout (getWeather("Vancouver"),5000); //only one time
+
 //undifined
 
 //Temperature units change button

@@ -1,5 +1,6 @@
 Yuki's goal in mid-term
 
+0. to think which way is the best wayt to do the same thing (several methods)
 1. to feel comfortable with passing parameters across js file. 
 2. to write JS without reference (at least what I have used before in previous assignments)
 3. Review CSS grid
@@ -10,7 +11,7 @@ Yuki's goal in mid-term
 
 **** Next ****
 
-2. Calcuration: get time, date, sunrise/sunset
+2. calculator: get time, date, sunrise/sunset
 
 *** Try *****
 Rader, Live camera, some animation with JavaScript
