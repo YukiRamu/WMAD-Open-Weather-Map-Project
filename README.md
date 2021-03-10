@@ -1,4 +1,4 @@
-# WMAD2-Midterm-Project
+# Open Weather Map Project (WMAD-mid-term)
 
 Open Weather API (https://home.openweathermap.org/users/sign_in)
 
