@@ -6,6 +6,7 @@ Yuki's goal in mid-term
 
 *****Must*****
 1. update data every 2 mins
+2. City not found pop up ( done simple solution)
 
 **** Next ****
 

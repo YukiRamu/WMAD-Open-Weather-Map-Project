@@ -32,10 +32,13 @@ const getWeather = (cityName) => {
 
   fetch(`${url}${cityName}&units=${units}&appid=${apiKey}`) //fetch API with input value and API key
     .then((response) => {
-      if (!response.ok) { //check response status (200~299)
-        throw error(`Fetch API failed`);
+      console.log(response);
+      console.log ("response status is " + response.status)
+      if (!response.ok) { //check response status (ok:00~299)
+        alert(`A city is not found. : HTTPS status = ${response.status}`)
+        throw error(response.statusText);
       }
-      else {
+      else {      
         return response.json(); //convert to JSON
       }
     })
@@ -61,9 +64,9 @@ const getWeather = (cityName) => {
         pressure.innerHTML = `<span>Pressure: </span>${data.main.pressure} hPa`; //pressure
       }
       createHTML();
-      console.log(data); //****** DELETE LATER check data
-      console.log(`${data.sys.sunrise}`.slice(0, 4))//****** UTC DELETE LATER check data
-      console.log(`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`); //****** DELETE LATER check data
+      //console.log(data); /!!!! DELETE LATER !!!!!!check data
+      //console.log(`${data.sys.sunrise}`.slice(0, 4))//****** UTC DELETE LATER check data
+      //xconsole.log(`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`); 
     })
     .catch(() => {
       console.error(`Something went wrong. Weather Forecast failed to be loaded.`);
@@ -78,7 +81,9 @@ openBtn.addEventListener("click", () => {
 
 //Show data when search button is clicked
 searchBtn.addEventListener("click", () => {
+  //★★★ */validation check to be added 
   getWeather(searchCity.value); //pass the input city value
+  searchCity.value = ""; //clear input
 });
 
 //Show Vancouver weather by default
@@ -87,6 +92,10 @@ window.addEventListener("load", () => {
 })
 
 /* =============== To be added ================ */
+//Set timer (2 mins auto refreshing)
+setInterval(getWeather("Vancouver"), 5000);
+//undifined
+
 //Temperature units change button
 
 //Sunset Sunrise GetDate functions
