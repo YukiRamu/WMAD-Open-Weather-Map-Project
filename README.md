@@ -13,3 +13,5 @@ Midterm Project
 4. The information that the app should show is Name of the city, currently weather, Feel Like, etc.
 
 5. Your app should update the weather after every 2 minutes.
+
+![image](https://user-images.githubusercontent.com/76931326/110544800-29aafa00-80e1-11eb-85e8-d5487eed78b2.png)
