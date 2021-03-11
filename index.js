@@ -64,34 +64,34 @@ const getWeather = (cityName) => {
       }
       console.log("#3: done creating HTML");
 
-      /* 2. Wait 2 mins */
-      const wait = async function () {
-        console.log("#4, I'm waiting for 2 mins")
-        return new Promise(function (resolve, reject) {
-          setTimeout(resolve, 120000);
-        });
-      };
+      // /* 2. Wait 2 mins */
+      // const wait = async function () {
+      //   console.log("#4, I'm waiting for 2 mins")
+      //   return new Promise(function (resolve, reject) {
+      //     setTimeout(resolve, 120000);
+      //   });
+      // };
 
-      /* 3. Auto-refresh after the 2-mins wait */
-      const refresh = async () => {
-        alert(`city name is ${cityName}`);
-        if (`!${cityName} == "Vancouver"`) { //not vancouver
-          console.log("Hi refreshing input city");
-          getWeather(`${cityName}`);
-        }
-        else { //vancouver
-          console.log("#4: Refreshing Vancouver weather");
-          getWeather("Vancouver");
-        }
-      }
+      // /* 3. Auto-refresh after the 2-mins wait */
+      // const refresh = async () => {
+      //   alert(`city name is ${cityName}`);
+      //   if (`!${cityName} == "Vancouver"`) { //not vancouver
+      //     console.log("Hi refreshing input city");
+      //     getWeather(`${cityName}`);
+      //   }
+      //   else { //vancouver
+      //     console.log("#4: Refreshing Vancouver weather");
+      //     getWeather("Vancouver");
+      //   }
+      // }
 
       const processAll = async () => {
         console.log("function 1 starts");
         await displayData();
         console.log("function 2 starts");
-        await wait();
+       // await wait();
         console.log("function 3 starts");
-        await refresh();
+        //await refresh();
       }
      processAll();
     })

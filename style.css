@@ -30,7 +30,6 @@ body::before {
   bottom: -5px;
 }
 button {
-  /* background-color: rgb(173, 14, 67); */
   background: linear-gradient(#ff6666, #a3a9ec);
   border-radius: 50vw;
   border: none;
@@ -51,9 +50,9 @@ i:hover {
 .container {
   /* font-family: 'Amatic SC', cursive;
   font-family: 'Merriweather', serif; */
-  font-family: 'Patrick Hand', cursive; 
+  font-family: "Patrick Hand", cursive;
   background-image: url(./img/img3.jpeg);
-  background-size: cover ;
+  background-size: cover;
   width: 90%;
   height: 80vh;
   position: absolute;
@@ -111,8 +110,6 @@ i:hover {
   margin-left: auto;
   display: flex;
   justify-content: center;
-  /* flex-direction: row;
-  align-items: center; */
   text-align: center;
 }
 .displayWeather .currentCity {
@@ -122,10 +119,6 @@ i:hover {
   border-radius: 5%;
   margin: 2em;
 }
-/* .displayWeather .currentCity .panel {
-  background-color: rgba(255, 255, 255, 0.565);
-  border-radius: 5%;
-} */
 .displayWeather .currentWeather {
   width: 100%;
   background-color: rgba(201, 230, 238, 0.6);
@@ -164,4 +157,3 @@ i:hover {
   font-size: 2em;
   margin-bottom: 0;
 }
-
