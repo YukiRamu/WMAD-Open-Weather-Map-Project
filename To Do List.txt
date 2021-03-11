@@ -3,11 +3,11 @@ Yuki's goal in mid-term
 0. to think which way is the best wayt to do the same thing (several methods)
 1. to feel comfortable with passing parameters across js file. 
 2. to write JS without reference (at least what I have used before in previous assignments)
-3. Review CSS grid
+3. Review JS async/await/promise, CSS grid
 
 *****Must*****
-1. update data every 2 mins
-2. City not found pop up ( done simple solution)
+1. update data every 2 mins --Done
+2. City not found pop up ( done simple solution) --Done
 
 **** Next ****
 
