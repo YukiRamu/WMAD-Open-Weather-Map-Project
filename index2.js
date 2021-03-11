@@ -1,5 +1,5 @@
 /* Yuki Matsubara Morning Class WMAD2 Mid-term */
-/* ======= variables declaration ======= */
+/* ============== variables declaration ============== */
 //API
 const url = "https://api.openweathermap.org/data/2.5/weather?q=";
 const apiKey = "facca3484f4808eeb90bb82accbee7b1";
@@ -25,9 +25,10 @@ let displayUnits = "";
 const openBtn = document.getElementById("openBtn");
 const sideBar = document.getElementById("sideBar");
 
-/* ======= function declaration ======= */
+/* ============== function declaration ============== */
 //fetch API - get weather info
-const getWeather = async (cityName) => {
+const getWeather = (cityName) => {
+
   console.log(`${url}${cityName}&appid=${apiKey}`); //****** DELETE LATER check url
 
   fetch(`${url}${cityName}&units=${units}&appid=${apiKey}`) //fetch API with input value and API key
@@ -42,7 +43,7 @@ const getWeather = async (cityName) => {
       }
     })
     .then((data) => {
-      //change units (Celsius vs Fahrenheit)
+      //prepare units (Celsius vs Fahrenheit)
       if (units = "metric") {
         displayUnits = "°C";
       } else if (units = "imperial") {
@@ -70,44 +71,29 @@ const getWeather = async (cityName) => {
     })
 }
 
-/* ======= call functions ======= */
+/* ============== call functions ============== */
 //Open side search bar
 openBtn.addEventListener("click", () => {
   sideBar.style.width = "20%";
 })
 
-//2 mins auto-refresh
-const refresh = async () => {
-  if (!searchCity.value == "Vancouver") { //not vancouver
-    console.log("Hi refreshing input city" + searchCity.value);
-    setInterval(() => {
-      getWeather(searchCity.value);
-    }, 5000);
-  }
-  else { //vancouver
-    console.log("Refreshing Vancouver weather");
-    setInterval(() => {
-      getWeather("Vancouver");
-    }, 5000);
-  }
-}
-refresh();
-
 //Show data when search button is clicked
-searchBtn.addEventListener("click", async () => {
+searchBtn.addEventListener("click", async() => {
+  // clearInterval(setInterval); //not work
   //validation check (not string or null)
   if (!isNaN(searchCity.value) || searchCity.value == null) {
     alert("Please enter a valid city name. Note that Numbers and Empty are not allowed");
   } else {
-    await getWeather(searchCity.value); //pass the input city value
+    getWeather(searchCity.value); //pass the input city value
     await refresh();
     //searchCity.value = ""; //clear input
   }
+  //await refresh(); //refresh every 2 mins
 });
 
 //Show Vancouver weather by default
 window.addEventListener("DOMContentLoaded", async () => {
-  await getWeather("Vancouver"); //pass "Vancouver"
+  getWeather("Vancouver"); //pass "Vancouver"
   await refresh();
 })
 
@@ -120,6 +106,25 @@ window.addEventListener("DOMContentLoaded", async () => {
 //   }, 5000);
 // }
 
+/* Wait 1 sec */
+// const wait = async function () {
+//   return new Promise(function (resolve, reject) {
+//     setTimeout(resolve, 1000);
+//   });
+// };
+
+const refresh = async () => {
+  if (!searchCity.value == "Vancouver") { //not vancouver
+    console.log("Hi refreshing input city" + searchCity.value);
+    setInterval(getWeather(searchCity.value), 5000);
+  }
+  else { //vancouver
+    console.log("Refreshing Vancouver weather");
+    setInterval(() => {
+      getWeather("Vancouver");
+    }, 5000);
+  }
+}
 
 //setTimeout (getWeather("Vancouver"),5000); //only one time
 
