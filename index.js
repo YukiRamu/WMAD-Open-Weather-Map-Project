@@ -11,35 +11,27 @@ const searchBtn = document.getElementById("searchBtn");
 
 //display weather
 let tempCityName = "";
-let city_country = document.getElementById("location");
-let localTime = document.getElementById("localTime");
-let localDate = document.getElementById("localDate");
-let sunrise = document.getElementById("sunrise");
-let sunset = document.getElementById("sunset");
-let icon = document.getElementById("icon");
-let temperature = document.getElementById("temperature");
-let description = document.getElementById("description");
-let feels_like = document.getElementById("feels_like");
-let humidity = document.getElementById("humidity");
-let pressure = document.getElementById("pressure");
+const city_country = document.getElementById("location");
+const localTime = document.getElementById("localTime");
+const localDate = document.getElementById("localDate");
+const sunrise = document.getElementById("sunrise");
+const sunset = document.getElementById("sunset");
+const icon = document.getElementById("icon");
+const temperature = document.getElementById("temperature");
+const description = document.getElementById("description");
+const feels_like = document.getElementById("feels_like");
+const humidity = document.getElementById("humidity");
+const pressure = document.getElementById("pressure");
 let displayUnits = "";
-let year = "";
 const MonthArray = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'Sepember', 'Octover', 'November', 'December'];
-let monthNum = "";
-let month = "";
-let date = "";
 const WeekArray = [`Sunday`, `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`,]
-let dayOfWeek = "";
-let hour = "";
-let min = "";
 let displayTime = "";
 let displayDate = "";
-let dateObj = new Date();
+const dateObj = new Date();
 
 //animation
 const openBtn = document.getElementById("openBtn");
 const sideBar = document.getElementById("sideBar");
-
 
 /* ======= function declaration and call ======= */
 //fetch API - get weather info
@@ -71,19 +63,33 @@ const getWeather = (cityName) => {
 
       /* 0. Get local time and date */
       const generateLocalDate = async () => {
+        //create a dateParts object
+        const dateParts = {
+          hour: dateObj.getHours().toString().padStart(2, `0`), //0 padding when needed
+          min: dateObj.getMinutes().toString().padStart(2, `0`), //0 padding when needed
+          year: dateObj.getFullYear(),
+          month: MonthArray[dateObj.getMonth()],
+          date: dateObj.getDate().toString().padStart(2, `0`), //0 padding when needed
+          daysOfWeek: WeekArray[dateObj.getDay()],
+        }
+
+        console.log(dateParts); //data check
+
+        /* ============================================================================== */
         //get date and time
-        hour = dateObj.getHours().toString().padStart(2, `0`); //0 padding when needed
-        min = dateObj.getMinutes().toString().padStart(2, `0`); //0 padding when needed
+        // hour = dateObj.getHours().toString().padStart(2, `0`); //0 padding when needed
+        // min = dateObj.getMinutes().toString().padStart(2, `0`); //0 padding when needed
 
-        year = dateObj.getFullYear();
-        month = MonthArray[dateObj.getMonth()];
-        date = dateObj.getDate().toString().padStart(2, `0`); //0 padding when needed
-        daysOfWeek = WeekArray[dateObj.getDay()];
+        // year = dateObj.getFullYear();
+        // month = MonthArray[dateObj.getMonth()];
+        // date = dateObj.getDate().toString().padStart(2, `0`); //0 padding when needed
+        // daysOfWeek = WeekArray[dateObj.getDay()];
+        /* ============================================================================== */
+        
+        displayTime = `${dateParts.hour} : ${dateParts.min}`;
+        displayDate = `${dateParts.month} ${dateParts.date}, ${dateParts.year} / ${dateParts.daysOfWeek}`;
 
-        displayTime = `${hour} : ${min}`;
-        displayDate = `${month} ${date}, ${year} / ${daysOfWeek}`;
-
-        console.log(`${displayDate}, ${displayTime}`) //will be deleted : check data
+        console.log(`current time is ${displayDate}, ${displayTime}`) //will be deleted : check data
 
         return displayDate, displayTime;
       }
@@ -125,7 +131,7 @@ const getWeather = (cityName) => {
         await generateLocalDate();
         await displayData();
         await wait();
-       // await refresh();
+        // await refresh();
       }
       processAll();
     })
