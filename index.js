@@ -3,14 +3,13 @@
 //API
 const url = "https://api.openweathermap.org/data/2.5/weather?q=";
 const apiKey = "24c4a9756532c3d6df0a376bc2cbe669";
-let units = "metric"; //default celsius
+let units = "metric"; //default = celsius
 
 //search 
 const searchCity = document.getElementById("searchCity");
 const searchBtn = document.getElementById("searchBtn");
 
 //display weather
-let tempCityName = "";
 const city_country = document.getElementById("location");
 const localTime = document.getElementById("localTime");
 const localDate = document.getElementById("localDate");
@@ -22,12 +21,14 @@ const description = document.getElementById("description");
 const feels_like = document.getElementById("feels_like");
 const humidity = document.getElementById("humidity");
 const pressure = document.getElementById("pressure");
-let displayUnits = "";
-const MonthArray = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'Sepember', 'Octover', 'November', 'December'];
-const WeekArray = [`Sunday`, `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`,]
-let displayTime = "";
-let displayDate = "";
-const dateObj = new Date();
+let tempCityName = ""; // for auto-refresh
+let displayUnits = ""; // to change units
+const MonthArray = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'Sepember', 'Octover', 'November', 'December']; // to generate local time
+const WeekArray = [`Sunday`, `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`,] // to generate local time
+let displayTime = ""; // to generate local time
+let displayDate = "";// to generate local time
+let formatsunrise = ""; // for unix time converter
+let formatsunset = ""; // for unix time converter
 
 //animation
 const openBtn = document.getElementById("openBtn");
@@ -61,9 +62,10 @@ const getWeather = (cityName) => {
         displayUnits = "°F";
       }
 
-      /* 0. Get local time and date */
+      /* 1. Get local time and date */
       const generateLocalDate = async () => {
         //create a dateParts object
+        const dateObj = new Date();
         const dateParts = {
           hour: dateObj.getHours().toString().padStart(2, `0`), //0 padding when needed
           min: dateObj.getMinutes().toString().padStart(2, `0`), //0 padding when needed
@@ -73,7 +75,10 @@ const getWeather = (cityName) => {
           daysOfWeek: WeekArray[dateObj.getDay()],
         }
 
-        console.log(dateParts); //data check
+        console.log(dateParts); // for data check purpose
+
+        //time shit calc
+        console.log(` ${data.timezone}` / 3600 + " hours"); // -28800 second
 
         /* ============================================================================== */
         //get date and time
@@ -85,7 +90,7 @@ const getWeather = (cityName) => {
         // date = dateObj.getDate().toString().padStart(2, `0`); //0 padding when needed
         // daysOfWeek = WeekArray[dateObj.getDay()];
         /* ============================================================================== */
-        
+
         displayTime = `${dateParts.hour} : ${dateParts.min}`;
         displayDate = `${dateParts.month} ${dateParts.date}, ${dateParts.year} / ${dateParts.daysOfWeek}`;
 
@@ -94,29 +99,50 @@ const getWeather = (cityName) => {
         return displayDate, displayTime;
       }
 
-      /* 1. Insert HTML tags and display data */
+      /* 2. Convert unix time to human readable time (sunrise/sunset) */
+      const unixConverter = async (unixtime) => {
+        const unixtimeToMilliSec = `${unixtime}` * 1000; //convert sec to millsec
+        const unixObj = new Date(unixtimeToMilliSec); //create object and pass the parameter
+        let formatTime = unixObj.toLocaleString(`ja-JP`); //convert unix time to readable time
+        console.log("format time is " + formatTime);
+        return formatTime;
+      }
+      //prepare sunset and sunrise
+      const PromiseSunrise = unixConverter(`${data.sys.sunrise}`); // return Promise
+      PromiseSunrise.then((data) => { //get Promise result
+        console.log(data)
+        formatsunrise = data.substring(10);
+      })
+      const PromiseSunset = unixConverter(`${data.sys.sunset}`); // return Promise
+      PromiseSunset.then((data) => { //get Promise result
+        console.log(data)
+        formatsunrset = data.substring(10);
+      })
+
+      /* 3. Insert HTML tags and display data */
       const displayData = async () => {
+
         city_country.innerHTML = `${data.name}, ${data.sys.country}`; //location
         localTime.innerHTML = `${displayTime}`; //local time
         localDate.innerHTML = `${displayDate}`; //local date
-        sunrise.innerHTML = `<span>Sunrise: </span>${data.sys.sunrise}`; //sunrise 
-        sunset.innerHTML = `<span>Sunset: </span>${data.sys.sunset}`; //sunset
+        sunrise.innerHTML = `<span>Sunrise: </span>${formatsunrise}`; //sunrise 
+        sunset.innerHTML = `<span>Sunset: </span>${formatsunrset}`; //sunset
         icon.innerHTML = `<img src="http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" alt="icon">`; //icon
         temperature.innerHTML = `${Math.round(data.main.temp)}${displayUnits}`; //main temperature
-        description.innerHTML = `${data.weather[0].main}`; //description ---array
+        description.innerHTML = `${data.weather[0].main}`; //description
         feels_like.innerHTML = `<span>Feels like: </span>${Math.round(data.main.feels_like)}${displayUnits}`; //feels like
         humidity.innerHTML = `<span>Humidity: </span>${data.main.humidity} %`; //humidity
         pressure.innerHTML = `<span>Pressure: </span>${data.main.pressure} hPa`; //pressure
       }
 
-      /* 2. Wait 2 mins */
+      /* 4. Wait 2 mins */
       const wait = async function () {
         return new Promise(function (resolve, reject) {
           setTimeout(resolve, 5000);
         });
       };
 
-      /* 3. Auto-refresh after the 2-mins wait */
+      /* 5. Auto-refresh after the 2-mins wait */
       const refresh = async () => {
         if (`!${tempCityName} == "Vancouver"`) { //not vancouver
           getWeather(`${tempCityName}`);
@@ -131,7 +157,7 @@ const getWeather = (cityName) => {
         await generateLocalDate();
         await displayData();
         await wait();
-        // await refresh();
+        await refresh();
       }
       processAll();
     })

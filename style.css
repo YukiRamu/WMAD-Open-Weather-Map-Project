@@ -114,14 +114,14 @@ i:hover {
 }
 .displayWeather .currentCity {
   width: 100%;
-  background-color: rgba(201, 230, 238, 0.6);
+  background-color: rgba(220, 239, 245, 0.848);
   border-top: 0.7em solid rgba(43, 168, 202, 0.6);
   border-radius: 5%;
   margin: 2em;
 }
 .displayWeather .currentWeather {
   width: 100%;
-  background-color: rgba(201, 230, 238, 0.6);
+  background-color: rgba(220, 239, 245, 0.848);
   border-bottom: 0.7em solid rgba(43, 168, 202, 0.6);
   border-radius: 5%;
   margin: 2em;
