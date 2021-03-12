@@ -13,7 +13,7 @@
 
 <h3 align="left">🙇‍♀️Under Construction:</h3>
 *1) Date and time in Vancouver are always shown. Those for other cities are still under construction.<br>
-*2) After "fahrenheit" is clicked and auto-refresh kicks, the unit goes back to celsius.
+*2) After "fahrenheit" is clicked and auto-refresh kicks, the unit goes back to celsius.<br>
 *3) This function is still under construction.
 
 <h3 align="left">📚Reference:</h3>
