@@ -8,7 +8,7 @@
 body {
   width: 100%;
   height: 100vh;
-  background-image: url(./img/img9.jpeg);
+  background-image: url(./img/img7.jpeg);
   background-repeat: no-repeat;
   background-size: cover;
   color: var(--text-color);
@@ -48,10 +48,8 @@ i:hover {
 }
 /* the entire display field */
 .container {
-  /* font-family: 'Amatic SC', cursive;
-  font-family: 'Merriweather', serif; */
   font-family: "Patrick Hand", cursive;
-  background-image: url(./img/img3.jpeg);
+  background-image: url(./img/img11.jpeg);
   background-size: cover;
   width: 90%;
   height: 80vh;
@@ -60,10 +58,10 @@ i:hover {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  box-shadow: 0 0 2em var(--primary-color);
+  box-shadow: 0 0 3em var(--primary-color);
 }
 /* side search bar */
-.sideBar {
+nav .sideBar {
   display: flex;
   justify-content: center;
   position: fixed;
@@ -76,20 +74,34 @@ i:hover {
   overflow-x: hidden;
   transition: 0.5s;
 }
-.sideBar .searchCity {
+nav .sideBar .searchCity {
   height: 10%;
   width: 100%;
   border-radius: 5%;
 }
-.sideBar .searchCity:focus {
+nav .sideBar .searchCity:focus {
   outline: none !important;
   border: 0.2em palevioletred solid;
 }
-.sideBar .searchBtn {
+nav .sideBar .searchBtn {
   height: 10%;
   border-radius: 10%;
   position: absolute;
   right: 0;
+}
+nav .countryList {
+  opacity: 0;
+  z-index: 1;
+  text-decoration: none;
+  font-size: 1.5em;
+  position: absolute;
+  top: 30%;
+  left: 2%;
+  color: var(--primary-color);
+  transition: 1s;
+}
+nav .countryList:hover {
+  color: #ffff99;
 }
 /* open button for side search bar */
 .openBtn {
@@ -114,14 +126,14 @@ i:hover {
 }
 .displayWeather .currentCity {
   width: 100%;
-  background-color: rgba(220, 239, 245, 0.848);
+  background-color: rgba(227, 237, 240, 0.738);
   border-top: 0.7em solid rgba(43, 168, 202, 0.6);
   border-radius: 5%;
   margin: 2em;
 }
 .displayWeather .currentWeather {
   width: 100%;
-  background-color: rgba(220, 239, 245, 0.848);
+  background-color: rgba(227, 237, 240, 0.738);
   border-bottom: 0.7em solid rgba(43, 168, 202, 0.6);
   border-radius: 5%;
   margin: 2em;
