@@ -1,6 +1,6 @@
 <h1 align="center">☀️Open Weather Map Project☀️</h1>
 <h3 align="left">⚓Website: https://yuki-m.ciccc.tech/</h3>
-<h3 align="left">💡Features:</h3>
+<h3 align="left">💡Features for Users:</h3>
 
 - Fetch API to fetch the data from Open Weather API
 - Vancouver weather in default
@@ -13,10 +13,11 @@
 
 <h3 align="left">🙇‍♀️Under Construction:</h3>
 *1) Date and time in Vancouver are always shown. Those for other cities are still under construction.<br>
-*2) After "fahrenheit" is clicked and auto-refresh kicks, the unit goes back to celsius.<br>
+*2) Technical Probrem contains. Check the next section for the detail.<br>
 *3) This function is still under construction.
 
 <h3 align="left">⚠️Infinite Function Call Issue:</h3>
+
 
 <h3 align="left">📚Reference:</h3>
 <p align="left">API: Open Weather Map (https://home.openweathermap.org/users/sign_in)</p>
