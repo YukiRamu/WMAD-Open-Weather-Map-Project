@@ -180,7 +180,7 @@ searchBtn.addEventListener("click", () => {
     alert(`Please enter a valid city name. Note that Numbers and Empty are not allowed!`);
   } else {
     getWeather(searchCity.value, `metric`); //call main function
-    searchCity.value = ""; //clear user input field
+    searchCity.value = ""; //clear user city search field
   }
 });
 
