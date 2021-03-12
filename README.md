@@ -13,7 +13,7 @@
 
 <h3 align="left">🙇‍♀️Under Construction:</h3>
 *1) Date and time in Vancouver are always shown. Those for other cities are still under construction.<br>
-*2) <b>Technical Probrem contains. Check the next section for the detail.</b><br>
+*2) <b>A Technical Probrem contains. Check the next section for the detail.</b><br>
 *3) This function is still under construction.
 
 <h3 align="left">⚠️Infinite Function Call Issue:</h3>
