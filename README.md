@@ -17,7 +17,8 @@
 *3) This function is still under construction.
 
 <h3 align="left">⚠️Infinite Function Call Issue:</h3>
-![image](https://user-images.githubusercontent.com/76931326/110993543-47b86a80-832c-11eb-91cf-4ed763fabcef.png)
+
+![image](https://user-images.githubusercontent.com/76931326/110993778-99f98b80-832c-11eb-9e3d-bac46c46fc45.png)
 
 <h3 align="left">📚Reference:</h3>
 <p align="left">API: Open Weather Map (https://home.openweathermap.org/users/sign_in)</p>
