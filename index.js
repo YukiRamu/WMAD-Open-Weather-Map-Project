@@ -134,6 +134,7 @@ const getWeather = (cityName, units) => {
 
       /* 5. Auto-refresh after the 2-mins wait */
       const refresh = async (unit) => {
+        console.log(unit)
         if (`!${tempCityName} == "Vancouver"`) { //not vancouver
           getWeather(`${tempCityName}`, `${unit}`);
         }
@@ -155,7 +156,8 @@ const getWeather = (cityName, units) => {
         await generateLocalDate();
         await displayData();
         await wait();
-        await refresh();
+        console.log("after wait " + `${units}`)
+        await refresh(`${units}`);
       }
       processAll();
     })
