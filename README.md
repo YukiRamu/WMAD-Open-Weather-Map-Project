@@ -16,6 +16,8 @@
 *2) After "fahrenheit" is clicked and auto-refresh kicks, the unit goes back to celsius.<br>
 *3) This function is still under construction.
 
+<h3 align="left">⚠️Infinite Function Call Issue:</h3>
+
 <h3 align="left">📚Reference:</h3>
 <p align="left">API: Open Weather Map (https://home.openweathermap.org/users/sign_in)</p>
 
