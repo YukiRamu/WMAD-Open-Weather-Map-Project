@@ -138,7 +138,7 @@ const getWeather = (cityName) => {
       /* 4. Wait 2 mins */
       const wait = async function () {
         return new Promise(function (resolve, reject) {
-          setTimeout(resolve, 5000);
+          setTimeout(resolve, 120000);
         });
       };
 
