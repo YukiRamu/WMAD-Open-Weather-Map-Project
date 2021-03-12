@@ -15,6 +15,7 @@ body {
   overflow: hidden;
   position: relative;
   z-index: 0;
+  font-family: "Patrick Hand", cursive;
 }
 /* blur effect for background image */
 body::before {
@@ -46,13 +47,20 @@ i {
 i:hover {
   color: var(--secondary-color);
 }
+/* header */
+.header {
+  color: var(--primary-color);
+  text-align: center;
+  font-size: 4em;
+  text-transform: uppercase;
+  text-shadow: 0 0 2em #ffff99;
+}
 /* the entire display field */
 .container {
-  font-family: "Patrick Hand", cursive;
   background-image: url(./img/img11.jpeg);
   background-size: cover;
   width: 90%;
-  height: 80vh;
+  height: 75vh;
   position: absolute;
   margin: auto;
   top: 50%;
@@ -127,20 +135,20 @@ nav .countryList:hover {
 .displayWeather .currentCity {
   width: 100%;
   background-color: rgba(227, 237, 240, 0.738);
-  border-top: 0.7em solid rgba(43, 168, 202, 0.6);
+  border-top: 0.7em solid rgba(7, 64, 80, 0.7);
   border-radius: 5%;
   margin: 2em;
 }
 .displayWeather .currentWeather {
   width: 100%;
   background-color: rgba(227, 237, 240, 0.738);
-  border-bottom: 0.7em solid rgba(43, 168, 202, 0.6);
+  border-bottom: 0.7em solid rgba(7, 64, 80, 0.7);
   border-radius: 5%;
   margin: 2em;
 }
 .displayWeather .currentCity h2 {
   font-size: 3.5em;
-  margin-top: 1.5em;
+  margin-top: 1em;
 }
 .displayWeather .currentCity h3 {
   font-size: 2.5em;
@@ -148,6 +156,7 @@ nav .countryList:hover {
 }
 .displayWeather .currentWeather h2 {
   font-size: 3.5em;
+  margin-bottom: 0;
 }
 .displayWeather .currentWeather h3 {
   font-size: 2.5em;
@@ -158,14 +167,30 @@ nav .countryList:hover {
 }
 .displayWeather .currentWeather img {
   width: 30%;
+  height: 20vh;
 }
 .displayWeather .currentWeather .unitBtn {
   box-shadow: 0 0 1em var(--primary-color);
   font-size: 1.3em;
-  padding: 0.5em 1em;
-  margin-top: 1em;
+  padding: 0.3em 1.5em;
 }
 .displayWeather p {
   font-size: 2em;
   margin-bottom: 0;
+}
+/* footer */
+.footer {
+  color: var(--primary-color);
+  text-align: center;
+  font-size: 1.5em;
+  position: fixed;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.footer i {
+  color: #ffcc99;
+}
+.footer i:hover {
+  color: #ff6666;
 }
