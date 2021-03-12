@@ -24,7 +24,7 @@ let humidity = document.getElementById("humidity");
 let pressure = document.getElementById("pressure");
 let displayUnits = "";
 let year = "";
-const monthArray = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'Sepember', 'Octover', 'November', 'December'];
+const MonthArray = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'Sepember', 'Octover', 'November', 'December'];
 let monthNum = "";
 let month = "";
 let date = "";
@@ -39,6 +39,7 @@ let dateObj = new Date();
 //animation
 const openBtn = document.getElementById("openBtn");
 const sideBar = document.getElementById("sideBar");
+
 
 /* ======= function declaration and call ======= */
 //fetch API - get weather info
@@ -75,7 +76,7 @@ const getWeather = (cityName) => {
         min = dateObj.getMinutes().toString().padStart(2, `0`); //0 padding when needed
 
         year = dateObj.getFullYear();
-        month = monthArray[dateObj.getMonth()];
+        month = MonthArray[dateObj.getMonth()];
         date = dateObj.getDate().toString().padStart(2, `0`); //0 padding when needed
         daysOfWeek = WeekArray[dateObj.getDay()];
 
@@ -119,11 +120,12 @@ const getWeather = (cityName) => {
         }
       }
 
+      // call function asynchronously
       const processAll = async () => {
         await generateLocalDate();
         await displayData();
         await wait();
-        await refresh();
+       // await refresh();
       }
       processAll();
     })
