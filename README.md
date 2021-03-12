@@ -18,7 +18,7 @@
 
 <h3 align="left">⚠️Infinite Function Call Issue:</h3>
 
-![image](https://user-images.githubusercontent.com/76931326/110995486-49376200-832f-11eb-8978-03a09675fcbd.png)
+![image](https://user-images.githubusercontent.com/76931326/110996457-cfa07380-8330-11eb-9c52-ed5de01db680.png)
 
 <h3 align="left">📚Reference:</h3>
 <p align="left">API: Open Weather Map (https://home.openweathermap.org/users/sign_in)</p>
