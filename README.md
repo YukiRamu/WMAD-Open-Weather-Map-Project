@@ -13,11 +13,11 @@
 
 <h3 align="left">🙇‍♀️Under Construction:</h3>
 *1) Date and time in Vancouver are always shown. Those for other cities are still under construction.<br>
-*2) Technical Probrem contains. Check the next section for the detail.<br>
+*2) <b>Technical Probrem contains. Check the next section for the detail.</b><br>
 *3) This function is still under construction.
 
 <h3 align="left">⚠️Infinite Function Call Issue:</h3>
-
+![image](https://user-images.githubusercontent.com/76931326/110993543-47b86a80-832c-11eb-91cf-4ed763fabcef.png)
 
 <h3 align="left">📚Reference:</h3>
 <p align="left">API: Open Weather Map (https://home.openweathermap.org/users/sign_in)</p>
