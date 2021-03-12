@@ -23,6 +23,7 @@ const pressure = document.getElementById("pressure");
 const celsius = document.getElementById("celsius");
 const fahrenheit = document.getElementById("fahrenheit");
 let tempCityName = ""; // for auto-refresh
+let tempUnits = ""; // for auto-refresh + change units
 let displayUnits = ""; // to change units
 const MonthArray = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'Sepember', 'Octover', 'November', 'December']; // to generate local time
 const WeekArray = [`Sunday`, `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`,] // to generate local time
@@ -36,10 +37,22 @@ const openBtn = document.getElementById("openBtn");
 const sideBar = document.getElementById("sideBar");
 const countryList = document.getElementById("countryList");
 
+let count = 0;
+
 /* ============== function declaration and call ============== */
 //fetch API - get weather info
 const getWeather = (cityName, units) => {
+
+  //counter
+  count += 1;
+  console.log("getWeather is called " + count + " times");
+  //counter
+
   tempCityName = cityName; // override the parameter for auto-refresh
+  tempUnits = units // override the parameter when the combination of auto-refresh and unit change happens
+
+  console.log("I'm in getWeather() function. tempUnits is  " + tempUnits);
+  console.log(`${url}${cityName}&units=${units}&appid=${apiKey}`);
 
   fetch(`${url}${cityName}&units=${units}&appid=${apiKey}`) //fetch API with input value and API key
     .then((response) => {
@@ -128,18 +141,18 @@ const getWeather = (cityName, units) => {
       /* 4. Wait 2 mins */
       const wait = async function () {
         return new Promise(function (resolve, reject) {
-          setTimeout(resolve, 120000);
+          setTimeout(resolve, 120000); //millseconds: always fullfilled mil
         });
       };
 
       /* 5. Auto-refresh after the 2-mins wait */
-      const refresh = async (unit) => {
-        console.log(unit)
+      const refresh = async (refreshUnit) => {
+        console.log("I'm refreshing " + refreshUnit)
         if (`!${tempCityName} == "Vancouver"`) { //not vancouver
-          getWeather(`${tempCityName}`, `${unit}`);
+          getWeather(`${tempCityName}`, `${refreshUnit}`);
         }
         else { //vancouver
-          getWeather(`Vancouver`, `${unit}`);
+          getWeather(`Vancouver`, `${refreshUnit}`);
         }
       }
 
@@ -156,8 +169,8 @@ const getWeather = (cityName, units) => {
         await generateLocalDate();
         await displayData();
         await wait();
-        console.log("after wait " + `${units}`)
-        await refresh(`${units}`);
+        console.log("after wait tempUnits is " + `${tempUnits}`);
+        await refresh(`${tempUnits}`);
       }
       processAll();
     })
