@@ -22,8 +22,8 @@ const humidity = document.getElementById("humidity");
 const pressure = document.getElementById("pressure");
 const celsius = document.getElementById("celsius");
 const fahrenheit = document.getElementById("fahrenheit");
-let tempCityName = ""; // to use the parameter outside the function block
-let tempUnits = ""; // fto use the parameter outside the function block
+let tempCityName = ""; // for auto-refresh
+let tempUnits = ""; // for auto-refresh + change units
 let displayUnits = ""; // to change units
 const MonthArray = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'Sepember', 'Octover', 'November', 'December']; // to generate local time
 const WeekArray = [`Sunday`, `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`,] // to generate local time
@@ -37,12 +37,22 @@ const openBtn = document.getElementById("openBtn");
 const sideBar = document.getElementById("sideBar");
 const countryList = document.getElementById("countryList");
 
+let count = 0;
+
 /* ============== function declaration and call ============== */
 //fetch API - get weather info
 const getWeather = (cityName, units) => {
 
-  tempCityName = cityName; // override the parameter when any button is clicked
-  tempUnits = units // override the parameter when when any button is clicked
+  //counter
+  count += 1;
+  console.log("getWeather is called " + count + " times");
+  //counter
+
+  tempCityName = cityName; // override the parameter for auto-refresh
+  tempUnits = units // override the parameter when the combination of auto-refresh and unit change happens
+
+  console.log("I'm in getWeather() function. tempUnits is  " + tempUnits);
+  console.log(`${url}${cityName}&units=${units}&appid=${apiKey}`);
 
   fetch(`${url}${cityName}&units=${units}&appid=${apiKey}`) //fetch API with input value and API key
     .then((response) => {
@@ -80,7 +90,7 @@ const getWeather = (cityName, units) => {
 
         return displayDate, displayTime;
 
-        //time shit calc -- under construction. please ignore
+        //time shit calc
         console.log(` ${data.timezone}` / 3600 + " hours"); // -28800 second: will be deleted
         /* ============================================================================== */
         //get date and time
@@ -107,12 +117,10 @@ const getWeather = (cityName, units) => {
       const PromiseSunrise = unixConverter(`${data.sys.sunrise}`); // return Promise
       PromiseSunrise.then((data) => { //get Promise result
         formatsunrise = data.substring(10); //get the time only
-        return formatsunrise;
       })
       const PromiseSunset = unixConverter(`${data.sys.sunset}`); // return Promise
       PromiseSunset.then((data) => { //get Promise result
         formatsunrset = data.substring(10); //get the time only
-        return formatsunset;
       })
 
       /* 3. Insert HTML tags and display data */
@@ -130,11 +138,39 @@ const getWeather = (cityName, units) => {
         pressure.innerHTML = `<span>Pressure: </span>${data.main.pressure} hPa`; //pressure
       }
 
+      /* 4. Wait 2 mins */
+      const wait = async function () {
+        return new Promise(function (resolve, reject) {
+          setTimeout(resolve, 120000); //millseconds: always fullfilled mil
+        });
+      };
+
+      /* 5. Auto-refresh after the 2-mins wait */
+      const refresh = async (refreshUnit) => {
+        console.log("I'm refreshing " + refreshUnit)
+        if (`!${tempCityName} == "Vancouver"`) { //not vancouver
+          getWeather(`${tempCityName}`, `${refreshUnit}`);
+        }
+        else { //vancouver
+          getWeather(`Vancouver`, `${refreshUnit}`);
+        }
+      }
+
+      /* 6. temperature unit change */
+      fahrenheit.addEventListener("click", () => {
+        refresh("imperial");
+      })
+      celsius.addEventListener("click", () => {
+        refresh("metric");
+      })
+
       // call function asynchronously
       const processAll = async () => {
         await generateLocalDate();
-        await unixConverter();
-        await displayData(); //need to be executed at the very last.
+        await displayData();
+        await wait();
+        console.log("after wait tempUnits is " + `${tempUnits}`);
+        await refresh(`${tempUnits}`);
       }
       processAll();
     })
@@ -142,16 +178,9 @@ const getWeather = (cityName, units) => {
     .catch(() => {
       console.error(`Something went wrong. Weather Forecast failed to be loaded.`);
     })
-
-  return tempCityName, tempUnits; // to use the parameter outside getWeather function block
 }
 
 /* ============== call getWeather function ============== */
-//Show Vancouver weather in default
-window.addEventListener("DOMContentLoaded", () => {
-  getWeather(`Vancouver`, `metric`); //call main function : Default
-})
-
 //Open side search bar
 openBtn.addEventListener("click", () => {
   sideBar.style.width = "20%";
@@ -165,22 +194,12 @@ searchBtn.addEventListener("click", () => {
   if (!isNaN(searchCity.value) || searchCity.value == null) {
     alert(`Please enter a valid city name. Note that Numbers and Empty are not allowed!`);
   } else {
-    getWeather(searchCity.value, `${tempUnits}`); //call main function
-    searchCity.value = ""; //clear user city search field for the next search
+    getWeather(searchCity.value, `metric`); //call main function
+    searchCity.value = ""; //clear user city search field
   }
 });
 
-//Fahrenheit - Celcius display change
-fahrenheit.addEventListener("click", () => {
-  getWeather(`${tempCityName}`, `imperial`); //call main function
+//Show Vancouver weather in default
+window.addEventListener("DOMContentLoaded", () => {
+  getWeather(`Vancouver`, `metric`); //call main function : Default
 })
-celsius.addEventListener("click", () => {
-  getWeather(`${tempCityName}`, `metric`); //call main function
-})
-
-/*Auto-refresh after the 2-mins wait */
-const refresh = () => {
-  getWeather(`${tempCityName}`, `${tempUnits}`); //dynamic parameter change
-}
-setInterval(refresh, 120000); //millsecond
-
