@@ -81,30 +81,28 @@ const getWeather = (cityName, units) => {
         displayDate = `${dateParts.month} ${dateParts.date}, ${dateParts.year} / ${dateParts.daysOfWeek}`;
         /* ===================================Version 1 ================================ */
 
-        // function calcTime(cit!y, offset) {
-          //create Date object
-          const dtObj = new Date();
-          //calculate the time difference in msec between UTC and selected city
-          const LocalCityOffsetMSec = `${data.timezone}` * 1000; //timezone: -25200 Van
-          //calculate current UTC unix time in msec
-          /* #1 : obtain your PC unix time in msec (Time where you are in)*/
-          const unixPCtimeMSec = dtObj.getTime(); 
-          /* #2 : obtain the time difference in msec between UTC and your PC time */
-          const PCoffsetMsec = dtObj.getTimezoneOffset() * 60000;
-          /* #3 : obtain current UTC unix time */
-          const unixCurrentUTCMSec = unixPCtimeMSec + PCoffsetMsec;
-          //calculate local city unix time in msec
-          const unixLocalCityTimeMsec = unixCurrentUTCMSec + LocalCityOffsetMSec;
+        /* ===================================Version 2 ================================ */
+        //STEP1: create Date object
+        const dtObj = new Date();
+        //STEP2: calculate the time difference in msec between UTC and selected city
+        const LocalCityOffsetMSec = `${data.timezone}` * 1000; //timezone: -25200 Van
+        //STEP3: calculate current UTC unix time in msec
+        /* #1 : obtain your PC unix time in msec (Time where you are in)*/
+        const unixPCtimeMSec = dtObj.getTime();
+        /* #2 : obtain the time difference in msec between UTC and your PC time */
+        const PCoffsetMsec = dtObj.getTimezoneOffset() * 60000;
+        /* #3 : obtain current UTC unix time */
+        const unixCurrentUTCMSec = unixPCtimeMSec + PCoffsetMsec;
+        //STEP4: calculate local city unix time in msec
+        const unixLocalCityTimeMsec = unixCurrentUTCMSec + LocalCityOffsetMSec;
+        //STEP5: initialize Date object and pass the parameter
+        const localDateObj = new Date(unixLocalCityTimeMsec);
+        //STEP6: convert unix time to readable time
+        const formatLocalCityTime = localDateObj.toLocaleString(`ja-JP`);
+        console.log("The local city time is " + formatLocalCityTime);
 
-          //initialize Date object and pass a parameter
-          const localDateObj = new Date(unixLocalCityTimeMsec);
-          //convert unix time to readable time
-          const formatLocalCityTime = localDateObj.toLocaleString(`ja-JP`); 
-          console.log("The local city time is " + formatLocalCityTime);
-
-          return formatLocalCityTime;
-        // }
-        // console.log(calcTime('Vancouver', '-8'))
+        return formatLocalCityTime;
+        /* ===================================Version 2 ================================ */
 
         return displayDate, displayTime;
 
