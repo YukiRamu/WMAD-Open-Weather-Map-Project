@@ -55,6 +55,7 @@ const getWeather = (cityName, units) => {
       }
     })
     .then((data) => {
+      console.log(data);
 
       //change display units (Celsius vs Fahrenheit)
       if (units == "metric") {
@@ -65,6 +66,7 @@ const getWeather = (cityName, units) => {
 
       /* 1. Get local time and date */
       const generateLocalDate = async () => {
+        /* ===================================Version 1 ================================ */
         //create a dateParts object
         const dateObj = new Date();
         const dateParts = {
@@ -77,29 +79,42 @@ const getWeather = (cityName, units) => {
         }
         displayTime = `${dateParts.hour} : ${dateParts.min}`;
         displayDate = `${dateParts.month} ${dateParts.date}, ${dateParts.year} / ${dateParts.daysOfWeek}`;
+        /* ===================================Version 1 ================================ */
+
+        // function calcTime(cit!y, offset) {
+          //create Date object
+          const dtObj = new Date();
+          //calculate the time difference in msec between UTC and selected city
+          const LocalCityOffsetMSec = `${data.timezone}` * 1000; //timezone: -25200 Van
+          //calculate current UTC unix time in msec
+          /* #1 : obtain your PC unix time in msec (Time where you are in)*/
+          const unixPCtimeMSec = dtObj.getTime(); 
+          /* #2 : obtain the time difference in msec between UTC and your PC time */
+          const PCoffsetMsec = dtObj.getTimezoneOffset() * 60000;
+          /* #3 : obtain current UTC unix time */
+          const unixCurrentUTCMSec = unixPCtimeMSec + PCoffsetMsec;
+          //calculate local city unix time in msec
+          const unixLocalCityTimeMsec = unixCurrentUTCMSec + LocalCityOffsetMSec;
+
+          //initialize Date object and pass a parameter
+          const localDateObj = new Date(unixLocalCityTimeMsec);
+          //convert unix time to readable time
+          const formatLocalCityTime = localDateObj.toLocaleString(`ja-JP`); 
+          console.log("The local city time is " + formatLocalCityTime);
+
+          return formatLocalCityTime;
+        // }
+        // console.log(calcTime('Vancouver', '-8'))
 
         return displayDate, displayTime;
 
-        //time shit calc -- under construction. please ignore
-        console.log(` ${data.timezone}` / 3600 + " hours"); // -28800 second: will be deleted
-        /* ============================================================================== */
-        //get date and time
-        // hour = dateObj.getHours().toString().padStart(2, `0`); //0 padding when needed
-        // min = dateObj.getMinutes().toString().padStart(2, `0`); //0 padding when needed
-
-        // year = dateObj.getFullYear();
-        // month = MonthArray[dateObj.getMonth()];
-        // date = dateObj.getDate().toString().padStart(2, `0`); //0 padding when needed
-        // daysOfWeek = WeekArray[dateObj.getDay()];
-        /* ============================================================================== */
-        console.log(`current time is ${displayDate}, ${displayTime}`) //will be deleted : check data
       }
 
-      /* 2. Convert unix time to human-readable time (sunrise/sunset) */
+      /* 2. Convert unix time (second) to human-readable time (sunrise/sunset) */
       const unixConverter = async (unixtime) => {
-        const unixtimeToMilliSec = `${unixtime}` * 1000; //convert sec to millsec
-        const unixObj = new Date(unixtimeToMilliSec); //create object and pass the parameter
-        let formatTime = unixObj.toLocaleString(`ja-JP`); //convert unix time to readable time
+        const unixtimeMSec = `${unixtime}` * 1000; //convert sec to msec
+        const unixObj = new Date(unixtimeMSec); //create object and pass the parameter
+        const formatTime = unixObj.toLocaleString(`ja-JP`); //convert unix time to readable time
         return formatTime;
       }
 
@@ -143,7 +158,7 @@ const getWeather = (cityName, units) => {
       console.error(`Something went wrong. Weather Forecast failed to be loaded.`);
     })
 
-  return tempCityName, tempUnits; // to use the parameter outside getWeather function block
+  return tempCityName, tempUnits; // to use the parameters outside getWeather function block
 }
 
 /* ============== call getWeather function ============== */
