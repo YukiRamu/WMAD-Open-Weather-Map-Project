@@ -206,5 +206,5 @@ celsius.addEventListener("click", () => {
 const refresh = () => {
   getWeather(`${tempCityName}`, `${tempUnits}`); //dynamic parameter change
 }
-setInterval(refresh, 10000); //millsecond
+setInterval(refresh, 120000); //millsecond
 
