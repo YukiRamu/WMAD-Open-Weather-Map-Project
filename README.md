@@ -22,6 +22,7 @@
   3. Function call <br>
 
 <h4>🏴󠁵󠁳󠁭󠁥󠁿The main function</h4>
+<a href ="https://github.com/YukiRamu/WMAD-Open-Weather-Map-Project/blob/master/Midterm%20Note.pdf" target = "_blank">🔗Detailed explanation available here</a>
 
 ![image](https://user-images.githubusercontent.com/76931326/111107931-0f27b500-8515-11eb-9800-4e3d0e5a9cda.png)
 
