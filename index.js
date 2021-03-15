@@ -54,9 +54,9 @@ const sideBar = document.getElementById("sideBar");
 const countryList = document.getElementById("countryList");
 
 /* ============== function declaration and call ============== */
-//fetch API - get weather info
+//get weather info
 const getWeather = (cityName, units) => {
-
+  /* #1: Fetch API */
   tempCityName = cityName; // override the parameter when any button is clicked
   tempUnits = units // override the parameter when any button is clicked
 
@@ -81,7 +81,7 @@ const getWeather = (cityName, units) => {
         displayUnits = "°F";
       }
 
-      /* 1. Calculate local time and date : Converting a Unix Timestamp to a Date string*/
+      /* 2. Calculate local time and date : Converting a Unix Timestamp to a Date string*/
       const generateLocalDate = async () => {
         //STEP1: create Date object
         const dateObj = new Date();
@@ -101,8 +101,8 @@ const getWeather = (cityName, units) => {
         //STEP6: convert unix time to readable time
         formatLocalCityTime = localDateObj.toLocaleString(`ja-JP`);
 
-        console.log (formatLocalCityTime);
-        
+        console.log(formatLocalCityTime);
+
         /* Data modification: 0 padding for Jan, Feb and March*/
         if (formatLocalCityTime.substr(6, 1) == `/`) {
           formatLocalCityTime = formatLocalCityTime.substr(0, 5) + `0` + formatLocalCityTime.substr(5);
@@ -125,11 +125,11 @@ const getWeather = (cityName, units) => {
         return displayDate, displayTime;
       }
 
-      /* 2. Convert unix time (second) to human-readable time (sunrise/sunset) */
+      /* 3. Convert unix time (second) to human-readable time (sunrise/sunset) */
       const unixConverter = async (unixtime) => {
         unixTimeMSec = `${unixtime}` * 1000; //convert sec to msec
         const unixObj = new Date(unixTimeMSec); //create object and pass the parameter
-        formatTime = unixObj.toLocaleString(`ja-JP`); //convert unix time to readable time
+        formatTime = unixObj.toLocaleString(`ja-JP`); //convert unix time to readable time (24h format)
         return formatTime;
       }
 
@@ -145,7 +145,7 @@ const getWeather = (cityName, units) => {
         return formatsunset;
       })
 
-      /* 3. Insert HTML tags and display data -- version 1 */
+      /* 4. Insert HTML tags and display data -- version 1 */
       const displayData = async () => {
         city_country.innerHTML = `${data.name}, ${data.sys.country}`; //location
         localTime.innerHTML = `${displayTime}`; //local time
