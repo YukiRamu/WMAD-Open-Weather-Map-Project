@@ -20,12 +20,12 @@ const description = document.getElementById("description");
 const feels_like = document.getElementById("feels_like");
 const humidity = document.getElementById("humidity");
 const pressure = document.getElementById("pressure");
-const celsius = document.getElementById("celsius");
-const fahrenheit = document.getElementById("fahrenheit");
 let tempCityName = ""; // to use the parameter outside the function block
 let tempUnits = ""; // to use the parameter outside the function block
 
 //F and C change function
+const celsius = document.getElementById("celsius");
+const fahrenheit = document.getElementById("fahrenheit");
 let displayUnits = "";
 
 //generateLocalDate function
@@ -71,6 +71,9 @@ const getWeather = (cityName, units) => {
       }
     })
     .then((data) => {
+
+      console.log(data);
+
       //change display units (Celsius vs Fahrenheit)
       if (units == "metric") {
         displayUnits = "°C";
@@ -78,18 +81,18 @@ const getWeather = (cityName, units) => {
         displayUnits = "°F";
       }
 
-      /* 1. Calculate local time and date */
+      /* 1. Calculate local time and date : Converting a Unix Timestamp to a Date string*/
       const generateLocalDate = async () => {
         //STEP1: create Date object
         const dateObj = new Date();
-        //STEP2: calculate the time difference in msec between UTC and selected city
+        //STEP2: calculate the time difference in msec between UTC and the selected city
         LocalCityOffsetMSec = `${data.timezone}` * 1000;
         //STEP3: calculate current UTC unix time in msec
         /* #1 : obtain your PC unix time in msec (Timezone where you are in)*/
         unixPCtimeMSec = dateObj.getTime();
         /* #2 : obtain the time difference in msec between UTC and your PC time */
         PCoffsetMsec = dateObj.getTimezoneOffset() * 60000;
-        /* #3 : obtain current UTC unix time */
+        /* #3 : calculate current UTC unix time */
         unixCurrentUTCMSec = unixPCtimeMSec + PCoffsetMsec;
         //STEP4: calculate local city unix time in msec
         unixLocalCityTimeMsec = unixCurrentUTCMSec + LocalCityOffsetMSec;
@@ -98,6 +101,8 @@ const getWeather = (cityName, units) => {
         //STEP6: convert unix time to readable time
         formatLocalCityTime = localDateObj.toLocaleString(`ja-JP`);
 
+        console.log (formatLocalCityTime);
+        
         /* Data modification: 0 padding for Jan, Feb and March*/
         if (formatLocalCityTime.substr(6, 1) == `/`) {
           formatLocalCityTime = formatLocalCityTime.substr(0, 5) + `0` + formatLocalCityTime.substr(5);
@@ -172,7 +177,7 @@ const getWeather = (cityName, units) => {
 }
 
 /* ============== call getWeather function ============== */
-//Show Vancouver weather in default
+//Show Vancouver weather by default
 window.addEventListener("DOMContentLoaded", () => {
   getWeather(`Vancouver`, `metric`); //call main function : Default
 })
