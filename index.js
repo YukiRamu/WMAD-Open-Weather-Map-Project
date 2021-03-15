@@ -29,7 +29,6 @@ let tempUnits = ""; // to use the parameter outside the function block
 let displayUnits = "";
 
 //generateLocalDate function
-const dateObj = new Date();
 let LocalCityOffsetMSec = "";
 let formatLocalCityTime = "";
 let unixPCtimeMSec = "";
@@ -81,10 +80,10 @@ const getWeather = (cityName, units) => {
 
       /* 1. Calculate local time and date */
       const generateLocalDate = async () => {
-
-        //STEP1: create Date object : Done in variable declaration
+        //STEP1: create Date object
+        const dateObj = new Date();
         //STEP2: calculate the time difference in msec between UTC and selected city
-        LocalCityOffsetMSec = `${data.timezone}` * 1000; //timezone: -25200 Van
+        LocalCityOffsetMSec = `${data.timezone}` * 1000;
         //STEP3: calculate current UTC unix time in msec
         /* #1 : obtain your PC unix time in msec (Timezone where you are in)*/
         unixPCtimeMSec = dateObj.getTime();
@@ -98,7 +97,6 @@ const getWeather = (cityName, units) => {
         const localDateObj = new Date(unixLocalCityTimeMsec);
         //STEP6: convert unix time to readable time
         formatLocalCityTime = localDateObj.toLocaleString(`ja-JP`);
-
         /* Data modification: 0 padding for Jan, Feb and March*/
         if (formatLocalCityTime.substr(6, 1) == `/`) {
           formatLocalCityTime = formatLocalCityTime.substr(0, 5) + `0` + formatLocalCityTime.substr(5);
@@ -208,5 +206,5 @@ celsius.addEventListener("click", () => {
 const refresh = () => {
   getWeather(`${tempCityName}`, `${tempUnits}`); //dynamic parameter change
 }
-setInterval(refresh, 120000); //millsecond
+setInterval(refresh, 10000); //millsecond
 
