@@ -17,9 +17,11 @@
 
 <h3 align="left">🗝️JavaScript Explanation:</h3>
 <h4>Structure of the code</h4>
-1. Variable Declaration
-2. Function Declaration with 4 functions included
-3. Function call 
+1. Variable Declaration<br>
+2. Function Declaration with 4 functions included<br>
+3. Function call <br>
+
+<h4>🏴󠁵󠁳󠁭󠁥󠁿The main function</h4>
 ![image](https://user-images.githubusercontent.com/76931326/111107600-624d3800-8514-11eb-8bb8-bf88633f49ab.png)
 
 <h3 align="left">📚Reference:</h3>
