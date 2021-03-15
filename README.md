@@ -15,6 +15,14 @@
 *1) Date and Time refresh every 2 minutes<br>
 *2) This function is still under construction.
 
+<h3 align="left">📚JavaScript Explanation:</h3>
+<h4>Structure of the code</h4>
+<p>getWeather() function</p>
+- Fetch API function
+- generateLocalDate()
+- unixConverter()
+- displayData()
+
 <h3 align="left">📚Reference:</h3>
 <p align="left">API: Open Weather Map (https://home.openweathermap.org/users/sign_in)</p>
 
