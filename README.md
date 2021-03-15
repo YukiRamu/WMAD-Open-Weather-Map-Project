@@ -12,14 +12,14 @@
 - Full forecast *2)
 
 <h3 align="left">🙇‍♀️Under Construction:</h3>
-*1) Date and Time refresh every 2 minutes<br>
-*2) This function is still under construction.
+  *1) Date and Time refresh every 2 minutes<br>
+  *2) This function is still under construction.
 
 <h3 align="left">🗝️JavaScript Explanation:</h3>
-<h4>Structure of the code</h4>
-1. Variable Declaration<br>
-2. Function Declaration with 4 functions included<br>
-3. Function call <br>
+  <h4>Structure of the code</h4>
+  1. Variable Declaration<br>
+  2. Function Declaration with 4 functions included<br>
+  3. Function call <br>
 
 <h4>🏴󠁵󠁳󠁭󠁥󠁿The main function</h4>
 
