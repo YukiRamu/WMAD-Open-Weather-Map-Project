@@ -12,7 +12,7 @@
 - Full forecast *2)
 
 <h3 align="left">🙇‍♀️Under Construction:</h3>
-*1) Date and Time refresh every 2 minutes
+*1) Date and Time refresh every 2 minutes<br>
 *2) This function is still under construction.
 
 <h3 align="left">📚Reference:</h3>
