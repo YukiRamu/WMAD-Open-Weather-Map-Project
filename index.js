@@ -72,8 +72,6 @@ const getWeather = (cityName, units) => {
       }
     })
     .then((data) => {
-      console.log(data);
-
       //change display units (Celsius vs Fahrenheit)
       if (units == "metric") {
         displayUnits = "°C";
