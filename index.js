@@ -97,6 +97,7 @@ const getWeather = (cityName, units) => {
         const localDateObj = new Date(unixLocalCityTimeMsec);
         //STEP6: convert unix time to readable time
         formatLocalCityTime = localDateObj.toLocaleString(`ja-JP`);
+
         /* Data modification: 0 padding for Jan, Feb and March*/
         if (formatLocalCityTime.substr(6, 1) == `/`) {
           formatLocalCityTime = formatLocalCityTime.substr(0, 5) + `0` + formatLocalCityTime.substr(5);
@@ -207,4 +208,3 @@ const refresh = () => {
   getWeather(`${tempCityName}`, `${tempUnits}`); //dynamic parameter change
 }
 setInterval(refresh, 120000); //millsecond
-
