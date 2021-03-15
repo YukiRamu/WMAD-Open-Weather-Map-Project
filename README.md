@@ -1,5 +1,5 @@
 <h1 align="center">☀️Open Weather Map Project☀️</h1>
-<h3 align="left">⚓Website: <a href = "https://yuki-m.ciccc.tech/">Weather Forecast on Earch</a></h3>
+<h3 align="left">⚓Website: <a href = "https://yuki-m.ciccc.tech/">Weather Forecast on Earth</a></h3>
 <h3 align="left">💡Features for Users:</h3>
 
 - Fetch API to fetch the data from Open Weather API
