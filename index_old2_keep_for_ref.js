@@ -8,7 +8,7 @@ const apiKey = "24c4a9756532c3d6df0a376bc2cbe669";
 const searchCity = document.getElementById("searchCity");
 const searchBtn = document.getElementById("searchBtn");
 
-//getWeather function
+//display weather
 const city_country = document.getElementById("location");
 const localTime = document.getElementById("localTime");
 const localDate = document.getElementById("localDate");
@@ -23,31 +23,14 @@ const pressure = document.getElementById("pressure");
 const celsius = document.getElementById("celsius");
 const fahrenheit = document.getElementById("fahrenheit");
 let tempCityName = ""; // to use the parameter outside the function block
-let tempUnits = ""; // to use the parameter outside the function block
-
-//F and C change function
-let displayUnits = "";
-
-//generateLocalDate function
-const dateObj = new Date();
-let LocalCityOffsetMSec = "";
-let formatLocalCityTime = "";
-let unixPCtimeMSec = "";
-let PCoffsetMsec = "";
-let unixCurrentUTCMSec = "";
-let unixLocalCityTimeMsec = "";
-const MonthArray = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'Sepember', 'Octover', 'November', 'December'];
-const WeekArray = [`Sunday`, `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`,]
-let displayTime = "";
-let displayDate = "";
-
-//unix converter
-let unixTimeMSec = "";
-let formatTime = "";
-let PromiseSunrise = "";
-let PromiseSunset = "";
-let formatsunrise = "";
-let formatsunset = "";
+let tempUnits = ""; // fto use the parameter outside the function block
+let displayUnits = ""; // to change units
+const MonthArray = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'Sepember', 'Octover', 'November', 'December']; // to generate local time
+const WeekArray = [`Sunday`, `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`,] // to generate local time
+let displayTime = ""; // to generate local time
+let displayDate = "";// to generate local time
+let formatsunrise = ""; // for unix time converter
+let formatsunset = ""; // for unix time converter
 
 //animation
 const openBtn = document.getElementById("openBtn");
@@ -59,7 +42,7 @@ const countryList = document.getElementById("countryList");
 const getWeather = (cityName, units) => {
 
   tempCityName = cityName; // override the parameter when any button is clicked
-  tempUnits = units // override the parameter when any button is clicked
+  tempUnits = units // override the parameter when when any button is clicked
 
   fetch(`${url}${cityName}&units=${units}&appid=${apiKey}`) //fetch API with input value and API key
     .then((response) => {
@@ -81,69 +64,71 @@ const getWeather = (cityName, units) => {
         displayUnits = "°F";
       }
 
-      /* 1. Calculate local time and date */
+      /* 1. Get local time and date */
       const generateLocalDate = async () => {
+        /* ===================================Version 1 ================================ */
+        //create a dateParts object
+        const dateObj = new Date();
+        const dateParts = {
+          hour: dateObj.getHours().toString().padStart(2, `0`), //0 padding when needed
+          min: dateObj.getMinutes().toString().padStart(2, `0`), //0 padding when needed
+          year: dateObj.getFullYear(),
+          month: MonthArray[dateObj.getMonth()],
+          date: dateObj.getDate().toString().padStart(2, `0`), //0 padding when needed
+          daysOfWeek: WeekArray[dateObj.getDay()],
+        }
+        displayTime = `${dateParts.hour} : ${dateParts.min}`;
+        displayDate = `${dateParts.month} ${dateParts.date}, ${dateParts.year} / ${dateParts.daysOfWeek}`;
+        /* ===================================Version 1 ================================ */
 
-        //STEP1: create Date object : Done in variable declaration
+        /* ===================================Version 2 ================================ */
+        //STEP1: create Date object
+        const dtObj = new Date();
         //STEP2: calculate the time difference in msec between UTC and selected city
-        LocalCityOffsetMSec = `${data.timezone}` * 1000; //timezone: -25200 Van
+        const LocalCityOffsetMSec = `${data.timezone}` * 1000; //timezone: -25200 Van
         //STEP3: calculate current UTC unix time in msec
         /* #1 : obtain your PC unix time in msec (Timezone where you are in)*/
-        unixPCtimeMSec = dateObj.getTime();
+        const unixPCtimeMSec = dtObj.getTime();
         /* #2 : obtain the time difference in msec between UTC and your PC time */
-        PCoffsetMsec = dateObj.getTimezoneOffset() * 60000;
+        const PCoffsetMsec = dtObj.getTimezoneOffset() * 60000;
         /* #3 : obtain current UTC unix time */
-        unixCurrentUTCMSec = unixPCtimeMSec + PCoffsetMsec;
+        const unixCurrentUTCMSec = unixPCtimeMSec + PCoffsetMsec;
         //STEP4: calculate local city unix time in msec
-        unixLocalCityTimeMsec = unixCurrentUTCMSec + LocalCityOffsetMSec;
+        const unixLocalCityTimeMsec = unixCurrentUTCMSec + LocalCityOffsetMSec;
         //STEP5: initialize Date object and pass the parameter
         const localDateObj = new Date(unixLocalCityTimeMsec);
         //STEP6: convert unix time to readable time
-        formatLocalCityTime = localDateObj.toLocaleString(`ja-JP`);
+        const formatLocalCityTime = localDateObj.toLocaleString(`ja-JP`);
+        console.log("The local city time is " + formatLocalCityTime);
 
-        /* Data modification: 0 padding for Jan, Feb and March*/
-        if (formatLocalCityTime.substr(6, 1) == `/`) {
-          formatLocalCityTime = formatLocalCityTime.substr(0, 5) + `0` + formatLocalCityTime.substr(5);
-        } else {
-          ;
-        }
-
-        /*  Prepare Display Data*/
-        const dateParts = {
-          time: formatLocalCityTime.substr(-8, 5),
-          year: formatLocalCityTime.substr(0, 4),
-          month: MonthArray[formatLocalCityTime.substr(6, 1) - 1],
-          date: formatLocalCityTime.substr(8, 2), //get 2 digit to cover both 1 and 2 digits date
-          daysOfWeek: WeekArray[localDateObj.getDay(unixLocalCityTimeMsec)],
-        }
-
-        displayTime = `${dateParts.time}`;
-        displayDate = `${dateParts.month} ${dateParts.date}, ${dateParts.year} / ${dateParts.daysOfWeek}`;
+        return formatLocalCityTime;
+        /* ===================================Version 2 ================================ */
 
         return displayDate, displayTime;
+
       }
 
       /* 2. Convert unix time (second) to human-readable time (sunrise/sunset) */
       const unixConverter = async (unixtime) => {
-        unixTimeMSec = `${unixtime}` * 1000; //convert sec to msec
-        const unixObj = new Date(unixTimeMSec); //create object and pass the parameter
-        formatTime = unixObj.toLocaleString(`ja-JP`); //convert unix time to readable time
+        const unixtimeMSec = `${unixtime}` * 1000; //convert sec to msec
+        const unixObj = new Date(unixtimeMSec); //create object and pass the parameter
+        const formatTime = unixObj.toLocaleString(`ja-JP`); //convert unix time to readable time
         return formatTime;
       }
 
       //Unix converter call and Promise handling : prepare sunset and sunrise
-      PromiseSunrise = unixConverter(`${data.sys.sunrise}`); // return Promise
+      const PromiseSunrise = unixConverter(`${data.sys.sunrise}`); // return Promise
       PromiseSunrise.then((data) => { //get Promise result
         formatsunrise = data.substring(10); //get the time only
         return formatsunrise;
       })
-      PromiseSunset = unixConverter(`${data.sys.sunset}`); // return Promise
+      const PromiseSunset = unixConverter(`${data.sys.sunset}`); // return Promise
       PromiseSunset.then((data) => { //get Promise result
         formatsunrset = data.substring(10); //get the time only
         return formatsunset;
       })
 
-      /* 3. Insert HTML tags and display data -- version 1 */
+      /* 3. Insert HTML tags and display data -- version 2 */
       const displayData = async () => {
         city_country.innerHTML = `${data.name}, ${data.sys.country}`; //location
         localTime.innerHTML = `${displayTime}`; //local time
