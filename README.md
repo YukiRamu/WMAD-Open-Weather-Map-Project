@@ -22,7 +22,7 @@
 3. Function call <br>
 
 <h4>🏴󠁵󠁳󠁭󠁥󠁿The main function</h4>
-![image](https://user-images.githubusercontent.com/76931326/111107600-624d3800-8514-11eb-8bb8-bf88633f49ab.png)
+![image](https://user-images.githubusercontent.com/76931326/111107931-0f27b500-8515-11eb-9800-4e3d0e5a9cda.png)
 
 <h3 align="left">📚Reference:</h3>
 <p align="left">API: Open Weather Map (https://home.openweathermap.org/users/sign_in)</p>
