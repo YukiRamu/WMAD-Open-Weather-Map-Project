@@ -1,5 +1,5 @@
 <h1 align="center">☀️Open Weather Map Project☀️</h1>
-<h3 align="left">⚓Website: https://yuki-m.ciccc.tech/</h3>
+<h3 align="left">⚓Website: <a href = "https://yuki-m.ciccc.tech/">Weather Forecast on Earch</a></h3>
 <h3 align="left">💡Features for Users:</h3>
 
 - Fetch API to fetch the data from Open Weather API
@@ -22,7 +22,7 @@
   3. Function call <br>
 
 <h4>🏴󠁵󠁳󠁭󠁥󠁿The main function</h4>
-<a href ="https://github.com/YukiRamu/WMAD-Open-Weather-Map-Project/blob/master/Midterm%20Note.pdf" target = "_blank">🔗Detailed explanation available here</a>
+<a href ="https://github.com/YukiRamu/WMAD-Open-Weather-Map-Project/blob/master/Midterm%20Note.pdf" target = "_blank">🔗Detailed explanation available here</a><br>
 
 ![image](https://user-images.githubusercontent.com/76931326/111107931-0f27b500-8515-11eb-9800-4e3d0e5a9cda.png)
 
