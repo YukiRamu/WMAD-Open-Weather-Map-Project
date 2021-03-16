@@ -22,7 +22,7 @@
   3. Function call <br>
 
 <h4>🏴󠁵󠁳󠁭󠁥󠁿The main function</h4>
-<a href ="https://github.com/YukiRamu/WMAD-Open-Weather-Map-Project/blob/master/Midterm%20Note.pdf" target = "_blank">🔗Detailed explanation available here</a>
+<a href ="https://github.com/YukiRamu/WMAD-Open-Weather-Map-Project/blob/master/Midterm_Note.pdf" target = "_blank">🔗Detailed explanation available here</a>
 <br><br>
 
 
