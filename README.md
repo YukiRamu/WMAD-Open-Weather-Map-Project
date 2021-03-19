@@ -21,6 +21,14 @@
   2. Function Declaration with 4 functions included<br>
   3. Function call <br>
 
+  <h4>Why I pick up this instead of this? Clarify the reason of the code structure.</h4>
+  1. The entire structure: <br>
+  - "let" and "const" keyword difference<br>
+  - Created HTML tags with innerHTML one by one<br>
+  →Since the code only obtains one set of weather data (one object), instead of using .map() method and creating html tags inside JavaScript code,<br>
+  I have created the base html tags inside html file and append each data one by one.
+  ![image](https://user-images.githubusercontent.com/76931326/111812215-222fe180-8895-11eb-99cc-8bb6454c12fd.png)
+  
 <h4>🏴󠁵󠁳󠁭󠁥󠁿The main function</h4>
 <a href ="https://github.com/YukiRamu/WMAD-Open-Weather-Map-Project/blob/master/Midterm_Note.pdf" target = "_blank">🔗Detailed explanation available here</a>
 <br><br>
