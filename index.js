@@ -81,7 +81,7 @@ const getWeather = (cityName, units) => {
         displayUnits = "°F";
       }
 
-      /* 2. Calculate local time and date : Converting a Unix Timestamp to a Date string*/
+      /* 2. Calculate local time and date : Converting a Unix Timestamp to a Date string */
       const generateLocalDate = async () => {
         //STEP1: create Date object
         const dateObj = new Date();
