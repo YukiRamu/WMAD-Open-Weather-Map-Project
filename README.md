@@ -25,7 +25,7 @@
   ⚈ "let" and "const" keyword difference<br>
   ⚈ Created HTML tags with innerHTML one by one<br><br>
      ⇒Since the code only obtains one set of weather data (one object), instead of using .map() method and creating html tags inside JavaScript code,
-      I have created the base html tags inside html file and append each data one by one.<br>
+      I have created the base html tags inside html file and append each data one by one.<br><br>
   
   ![image](https://user-images.githubusercontent.com/76931326/111812215-222fe180-8895-11eb-99cc-8bb6454c12fd.png)
   
