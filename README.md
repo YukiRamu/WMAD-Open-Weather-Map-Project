@@ -12,14 +12,14 @@
 - Full forecast *2)
 
 <h3 align="left">🙇‍♀️Under Construction:</h3>
-  &nbsp*1) Date and Time refresh every 2 minutes, not instantly.<br>
-  &nbsp*2) This function is still under construction.
+  &nbsp&nbsp*1) Date and Time refresh every 2 minutes, not instantly.<br>
+  &nbsp&nbsp*2) This function is still under construction.
 
 <h3 align="left">🗝️JavaScript Explanation:</h3>
   <h4>🧱Structure of the code</h4>
-  &nbsp1. Variable Declaration<br>
-  &nbsp2. Function Declaration with 4 functions included<br>
-  &nbsp3. Function call <br>
+  &nbsp&nbsp1. Variable Declaration<br>
+  &nbsp&nbsp2. Function Declaration with 4 functions included<br>
+  &nbsp&nbsp3. Function call <br>
 
   <h4>❓Why I pick up this instead of this? Clarify the reason of the code structure.</h4>
   ⚈ "let" and "const" keyword difference<br>
